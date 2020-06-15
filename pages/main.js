@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Map from '../components/Map';
 
-const HIKE_API_KEY = process.env.HIKE_API_KEY;
+const hike_api_key = process.env.hike_api_key;
 
 function Main() {
     const [trailsList, setTrailsList] = useState({
@@ -27,7 +27,7 @@ function Main() {
           const long = pos.coords.longitude;
           
           const trails = await fetch (
-            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=200&maxResults=5&key=${HIKE_API_KEY}`
+            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=200&maxResults=5&key=${hike_api_key}`
           )
             .then(res => res.json())
 
@@ -35,7 +35,7 @@ function Main() {
               setTrailsList({
                 list: data.trails
             }))
-            .catch(err => console.log(err))            
+            .catch(() => console.log('Error fetching hiking data'))
         });
       }
     }

@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import { GoogleMap } from 'react-google-maps';
 import MyMarker from '../components/MyMarker';
 
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+const google_api_key = process.env.google_api_key;
 
 const Map = (props) => {
   const trails = props.trailList;
