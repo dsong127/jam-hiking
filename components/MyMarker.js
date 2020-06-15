@@ -3,13 +3,11 @@ import React from 'react';
 const SIZE = 30;
 
 const markerStyle = {
-  
   position: 'absolute',
   width: SIZE,
   height: SIZE,
   left: -SIZE / 2,
   top: -SIZE / 2,
-
   backgroundColor: 'rgba(52, 52, 52, 0,8)',
   color: '#A31D00',
   fontWeight: 'bold',

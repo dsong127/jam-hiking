@@ -1,17 +1,12 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { GoogleMap, Marker, withScriptjs, withGoogleMap } from "react-google-maps"
-import GoogleMapReact from 'google-map-react';
 import Map from '../components/Map';
 
+const HIKE_API_KEY = process.env.HIKE_API_KEY;
 
 function Main() {
     const [trailsList, setTrailsList] = useState({
       list: []
-    });
-    
-    const [loadingState, setLoading] = useState({
-      loading: false
     });
 
     const TrailsView = trailsList.list.map((trail, index) => {
@@ -32,7 +27,7 @@ function Main() {
           const long = pos.coords.longitude;
           
           const trails = await fetch (
-            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&maxResults=5&key=`
+            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=200&maxResults=5&key=${HIKE_API_KEY}`
           )
             .then(res => res.json())
 
