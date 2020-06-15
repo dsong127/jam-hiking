@@ -22,6 +22,7 @@ const styleHover = {
 
 class MyMarker extends React.PureComponent {
 
+  // Render custom marker to be used on Google Maps
   render() {
     const style = this.props.$hover ? styleHover : markerStyle;
 

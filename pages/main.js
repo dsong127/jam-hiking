@@ -5,10 +5,12 @@ import Map from '../components/Map';
 const hike_api_key = process.env.hike_api_key;
 
 function Main() {
+    // State to store retrieved trails list from the Hiking Project API
     const [trailsList, setTrailsList] = useState({
       list: []
     });
 
+    // Create multiple divs to display the retrieved trails list
     const TrailsView = trailsList.list.map((trail, index) => {
       return <div key={index} className="listRow">
         <img src={trail.imgSmall}></img>
@@ -19,8 +21,9 @@ function Main() {
       </div>
     })
 
+    // Button submit handler for getting user's current location coordinates,
+    // And using them to build the URL to the Hiking Project API data endpoint
     const getLocation = () => {
-      
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( async (pos) => {
           const lat = pos.coords.latitude;
@@ -29,8 +32,7 @@ function Main() {
           const trails = await fetch (
             `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=200&maxResults=5&key=${hike_api_key}`
           )
-            .then(res => res.json())
-
+            .then( res => res.json() )
             .then( (data) => 
               setTrailsList({
                 list: data.trails
@@ -40,6 +42,8 @@ function Main() {
       }
     }
 
+    // Render text and get my location button
+    // Also render the trails information when the trailList state gets updated
     return (
         <div style={{ 
             display: "grid", 
