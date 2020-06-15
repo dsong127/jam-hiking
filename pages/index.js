@@ -10,7 +10,7 @@ export default function Home() {
         <link href="https://fonts.googleapis.com/css2?family=Varela&display=swap" rel="stylesheet"></link>
       </Head>
       
-      <img class="image'"
+      <img
         src={'/bg.jpg'}
         style={{
           width: '100%',
