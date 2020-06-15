@@ -1,14 +1,21 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import { useState } from 'react';
+import { GoogleMap, Marker, withScriptjs, withGoogleMap } from "react-google-maps"
+import GoogleMapReact from 'google-map-react';
+import Map from '../components/Map';
 
 
 function Main() {
-    const [trailState, setTrails] = useState({
+    const [trailsList, setTrailsList] = useState({
       list: []
     });
+    
+    const [loadingState, setLoading] = useState({
+      loading: false
+    });
 
-    const updatedTrailsView = trailState.list.map((trail) => {
-      return <div className="listRow">
+    const TrailsView = trailsList.list.map((trail, index) => {
+      return <div key={index} className="listRow">
         <img src={trail.imgSmall}></img>
         <h3>{trail.name}</h3>
         <p>{trail.summary}</p>
@@ -23,23 +30,20 @@ function Main() {
         navigator.geolocation.getCurrentPosition( async (pos) => {
           const lat = pos.coords.latitude;
           const long = pos.coords.longitude;
-          console.log('fetching')
+          
           const trails = await fetch (
-            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&key=`
+            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&maxResults=5&key=`
           )
             .then(res => res.json())
-            .catch(err => console.log(err))
-            console.log(trails.trails)
-            
-            setTrails({
-              list: trails.trails
-            })
 
-            console.log(trailState.list)
+            .then( (data) => 
+              setTrailsList({
+                list: data.trails
+            }))
+            .catch(err => console.log(err))            
         });
       }
     }
-
 
     return (
         <div style={{ 
@@ -61,9 +65,13 @@ function Main() {
               </h2>
               <button onClick={getLocation}>Locate me</button>
             </div>
-              {updatedTrailsView}
+              {TrailsView}
           </div>
-          <div className="mapCol">Column 2</div>
+          
+          <div className="mapCol">
+            <Map trailList={trailsList.list}/>
+
+          </div>
 
         <style jsx>{`
         .colContainer {
