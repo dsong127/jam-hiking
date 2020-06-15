@@ -7,17 +7,14 @@ const google_api_key = process.env.google_api_key;
 
 const Map = (props) => {
   const trails = props.trailList;
-  console.log(trails)
-  
 
-  
-    const markers = trails.map((trail, index) => {
-      return <MyMarker key={index}
-        text={trail.name}
-        lat={trail.latitude}
-        lng={trail.longitude}
-        />
-    })
+  const markers = trails.map((trail, index) => {
+    return <MyMarker key={index}
+      text={trail.name}
+      lat={trail.latitude}
+      lng={trail.longitude}
+      />
+  })
   
   return (
     <div style={{ height: '100vh', width: '100%' }}>
