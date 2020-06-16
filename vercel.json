@@ -1,8 +1,4 @@
 {
-  "env": {
-    "DEMO_KEY": "@demo-key",
-    "DEMO_SECRET": "@demo-secret"
-  },
   "build": {
       "env": {
         "GOOGLE_API_KEY": "@google_api_key",
