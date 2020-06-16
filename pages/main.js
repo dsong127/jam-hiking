@@ -28,7 +28,7 @@ function Main() {
           const long = pos.coords.longitude;
 
           const trails = await fetch (
-            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&maxResults=5&key=${process.env.HIKING_API_KEY}`
+            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=100&sort=distance&maxResults=10&key=${process.env.HIKING_API_KEY}`
           )
             .then( res => res.json() )
             .then( (data) => 
