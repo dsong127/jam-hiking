@@ -3,8 +3,6 @@ import GoogleMapReact from 'google-map-react';
 import { GoogleMap } from 'react-google-maps';
 import MyMarker from '../components/MyMarker';
 
-const google_api_key = process.env.google_api_key;
-
 const Map = (props) => {
   const trails = props.trailList;
 
@@ -22,7 +20,7 @@ const Map = (props) => {
   return (
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: google_api_key }}
+        bootstrapURLKeys={{ key: process.env.GOOGLE_API_KEY }}
         defaultCenter={{lat: 41.88, lng: -87.62}}
         defaultZoom={11}
       >

@@ -2,9 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Map from '../components/Map';
 
-const hike_api_key = process.env.hike_api_key;
-
-function Main() {
+function Main() {  
     // State to store retrieved trails list from the Hiking Project API
     const [trailsList, setTrailsList] = useState({
       list: []
@@ -28,9 +26,9 @@ function Main() {
         navigator.geolocation.getCurrentPosition( async (pos) => {
           const lat = pos.coords.latitude;
           const long = pos.coords.longitude;
-          
+
           const trails = await fetch (
-            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=200&maxResults=5&key=${hike_api_key}`
+            `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=200&maxResults=5&key=${process.env.HIKING_API_KEY}`
           )
             .then( res => res.json() )
             .then( (data) => 
